@@ -1,4 +1,4 @@
-import { EmailOutlined, LocationCity, Phone, Place } from '@mui/icons-material';
+import { ArticleOutlined, EmailOutlined, LocationCity , Place } from '@mui/icons-material';
 import { useGetIdentity } from '@pankod/refine-core';
 import { Box, Stack, Typography } from '@pankod/refine-mui';
 import { Link } from '@pankod/refine-react-router-v6';
@@ -12,14 +12,13 @@ const InfoBar = ({ icon, name }: InfoBarProps) => (
   </Stack>
 )
 
-
-const AgentCard = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) => {
+const AgentCard = ({ id, name, email, avatar, noOfProperties, noOfPosts }: AgentCardProp) => {
   const { data: currentUser } = useGetIdentity();
 
   const generateLink = () => {
     if(currentUser.email === email) return '/my-profile'
 
-    return `/agents/show/${id}`;
+    return `/admins/show/${id}`;
   }
 
   return (
@@ -30,7 +29,7 @@ const AgentCard = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) =
       sx={{
         display:'flex', flexDirection: {xs: "column", sm: "row"},
         gap: '20px', padding: '20px',
-        '&:hover': { boxShadow: '0 22px 45px 2px rgba(176,176,176,0.1)'}
+        '&:hover': { boxShadow: '20px 22px 45px 10px rgba(176,176,176,0.1)'}
       }}
     >
       <img
@@ -43,7 +42,7 @@ const AgentCard = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) =
       <Stack direction="column" justifyContent="space-between" flex={1} gap={{xs:4, sm:2}}>
           <Stack gap={2} direction="row" flexWrap="wrap" alignItems="center">
             <Typography fontSize={22} fontWeight={600} color="#11142d">{name}</Typography>
-            <Typography fontSize={14} color="#808191">Real-Estate Agent</Typography>
+            <Typography fontSize={14} color="#808191">Admin</Typography>
           </Stack>
           <Stack direction="row" flexWrap="wrap" justifyContent="space-between" alignItems="center" gap={2}>
             <InfoBar 
@@ -55,12 +54,12 @@ const AgentCard = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) =
               name="Lagos"
               />
             <InfoBar 
-              icon={<Phone sx={{ color:'#808191'}}/>}
-              name="+234-8128111327"
-              />
-            <InfoBar 
               icon={<LocationCity sx={{ color:'#808191'}}/>}
               name={`${noOfProperties} Properties`}
+              />
+            <InfoBar 
+              icon={<ArticleOutlined sx={{ color:'#808191'}}/>}
+              name={`${noOfPosts} Posts`}
               />
           </Stack>
       </Stack>
@@ -68,4 +67,4 @@ const AgentCard = ({ id, name, email, avatar, noOfProperties }: AgentCardProp) =
   )
 }
 
-export default AgentCard
+export default AgentCard;

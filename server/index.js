@@ -5,6 +5,7 @@ import cors from 'cors';
 import connectDB from './mongodb/connect.js';
 import userRouter from './routes/user.routes.js';
 import propertyRouter from './routes/property.routes.js';
+import postRouter from './routes/post.routes.js';
 
 dotenv.config();
 
@@ -13,12 +14,13 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Welcome to Yariga!',
+    res.status(200).json({ message: 'Welcome to Adron-Dashboard!',
     });
 });
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/properties', propertyRouter);
+app.use('/api/v1/posts', postRouter);
 
 const startServer = async () => {
     try {

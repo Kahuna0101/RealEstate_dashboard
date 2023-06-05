@@ -20,6 +20,15 @@
   .property_details-img {
     width: 100%;
   }
+
+  .post_details-img {
+    width: 100%;
+  }
+  
+  .refine-logo {
+    display: none;
+  }
+
   
   @media screen and (max-width: 900px) {
     .my_profile-bg {
@@ -35,6 +44,10 @@
     .property_details-img {
         width: 100%;
         height: auto;
+    }
+
+    .post_details-img {
+      width: 100%;
     }
   }
   

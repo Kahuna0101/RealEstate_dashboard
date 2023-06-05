@@ -4,7 +4,8 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     avatar: { type: String, required: true },
-    allProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }]
+    allProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
+    allPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
 });
 
 const userModel = mongoose.model('User', UserSchema);

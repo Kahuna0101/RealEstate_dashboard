@@ -6,6 +6,7 @@ export interface AgentCardProp {
     email: string,
     avatar: string,
     noOfProperties: number
+    noOfPosts: number
 }
 
 export interface InfoBarProps {

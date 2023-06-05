@@ -9,8 +9,24 @@ export interface FormValues {
     title: string,
     description: string,
     propertyType: string,
+    propertyStatus: string,
     location: string,
+    gateHouse: string,
+    baths: string,
+    rooms: string,
+    area: string,
     price: number | undefined,
+    legalDoc: string,
+    structuralDrawing: string,
+    surveyPrice: string,
+    certificationFee: string,
+    devFee: string,
+    meFeeDuplex: string,
+    meFeeBungalow: string,
+    archFeeDuplex: string,
+    archFeeBungalow: string,
+    approvalBungalow: string,
+    approvalDuplex: string,
 }
 
 export interface PropertyCardProps {
@@ -19,4 +35,5 @@ export interface PropertyCardProps {
   location: string,
   price: string,
   photo: string,
+  date: string,
 }

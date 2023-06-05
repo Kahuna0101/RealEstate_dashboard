@@ -13,7 +13,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-
 const getAllProperties = async (req, res) => {
     const { _end, _order, _start, _sort, title_like = "", propertyType = "" } = req.query;
 
@@ -58,58 +57,156 @@ const getPropertyDetail = async (req, res) => {
 
 const createProperty = async (req, res) => {
     try {
-        const { title, description, propertyType, location, price, photo, email } = req.body;
-    
-        // Start a new session
-        const session = await mongoose.startSession();
-        session.startTransaction();
-        
-        
-        const user = await User.findOne({ email }).session(session);
-    
-        if(!user) throw new Error('User not found');
-    
-        const photoUrl = await cloudinary.uploader.upload(photo);
-        
-        // Create a new property
-        const newProperty = await Property.create({
-            title,
-            description,
-            propertyType,
-            location,
-            price,
-            photo: photoUrl.url,
-            creator: user._id
-        });
-        
-        // Update the user's allProperties field with the new property
-        user.allProperties.push(newProperty._id);
-        await user.save({ session });
-        
-        // Commit the transaction
-        await session.commitTransaction();
-        
-        // Send response
-        res.status(200).json({ message: 'Property created succesfully' });
+      const {
+        title,
+        description,
+        propertyType,
+        propertyStatus,
+        location,
+        price,
+        gateHouse,
+        baths,
+        rooms,
+        area,
+        video,
+        panorama,
+        legalDoc,
+        structuralDrawing,
+        surveyPrice,
+        certificationFee,
+        devFee,
+        meFeeDuplex,
+        meFeeBungalow,
+        archFeeDuplex,
+        archFeeBungalow,
+        approvalBungalow,
+        approvalDuplex,
+        email,
+        images, // multiple images
+      } = req.body;
+  
+      // Start a new session
+      const session = await mongoose.startSession();
+      session.startTransaction();
+  
+      const user = await User.findOne({ email }).session(session);
+  
+      if (!user) throw new Error('User not found');
+  
+      // upload multiple images
+      const imageUrls = await Promise.all(
+        images.map(async (image) => {
+          const imageUrl = await cloudinary.uploader.upload(image);
+          return imageUrl.secure_url;
+        })
+      );
+  
+      // Create a new property
+      const newProperty = await Property.create({
+        title,
+        description,
+        propertyType,
+        propertyStatus,
+        location,
+        price,
+        gateHouse,
+        baths,
+        rooms,
+        area,
+        video,
+        panorama,
+        legalDoc,
+        structuralDrawing,
+        surveyPrice,
+        certificationFee,
+        devFee,
+        meFeeDuplex,
+        meFeeBungalow,
+        archFeeDuplex,
+        archFeeBungalow,
+        approvalBungalow,
+        approvalDuplex,
+        images: imageUrls, // save multiple image URLs in MongoDB
+        creator: user._id,
+      });
+  
+      // Update the user's allProperties field with the new property
+      user.allProperties.push(newProperty._id);
+      await user.save({ session });
+  
+      // Commit the transaction
+      await session.commitTransaction();
+  
+      // Send response
+      res.status(200).json({ message: 'Property created successfully' });
     } catch (error) {
-        res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.message });
     }
-};
+  };
 
 const updateProperty = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, propertyType, location, price, photo } = req.body;
+        const { 
+          title,
+          description,
+          propertyType,
+          propertyStatus,
+          location,
+          price,
+          gateHouse,
+          baths,
+          rooms,
+          area,
+          video,
+          panorama,
+          legalDoc,
+          structuralDrawing,
+          surveyPrice,
+          certificationFee,
+          devFee,
+          meFeeDuplex,
+          meFeeBungalow,
+          archFeeDuplex,
+          archFeeBungalow,
+          approvalBungalow,
+          approvalDuplex,
+          images, 
+        } = req.body;
 
-        const photoUrl = await cloudinary.uploader.upload(photo);
+        const imageUrls = await Promise.all(
+        images.map(async (image) => {
+          const imageUrl = await cloudinary.uploader.upload(image);
+          return imageUrl.secure_url;
+        })
+      );
 
+        // Update the property
         await Property.findByIdAndUpdate({ _id: id}, {
             title,
             description,
             propertyType,
+            propertyStatus,
             location,
             price,
-            photo: photoUrl.url || photo
+            gateHouse,
+            baths,
+            rooms,
+            area,
+            video,
+            panorama,
+            legalDoc,
+            structuralDrawing,
+            surveyPrice,
+            certificationFee,
+            devFee,
+            meFeeDuplex,
+            meFeeBungalow,
+            archFeeDuplex,
+            archFeeBungalow,
+            approvalBungalow,
+            approvalDuplex,
+            images: imageUrls, // update multiple image URLs in MongoDB
         })
 
         res.status(200).json({ message: 'Property updated successfully' })
@@ -119,20 +216,28 @@ const updateProperty = async (req, res) => {
 };
 
 const deleteProperty = async (req, res) => {
-    let propertyToDelete;
-    try {
-      const { id } = req.params;
-      propertyToDelete = await Property.findById({ _id: id });
+  try {
+    const { id } = req.params;
   
-      if (!propertyToDelete) {
-        throw new Error('Property not found');
-      }
+    const propertyToDelete = await Property.findById(id).populate('creator');
   
-      propertyToDelete.deleteOne()
-      res.status(200).json({ message: 'Property deleted successfully', propertyToDelete });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+    if (!propertyToDelete) {
+      throw new Error('Property not found');
     }
+  
+    const session = await mongoose.startSession();
+    session.startTransaction();
+  
+    await propertyToDelete.remove({ session });
+    propertyToDelete.creator.allProperties.pull(propertyToDelete._id);
+  
+    await propertyToDelete.creator.save({ session });
+    await session.commitTransaction();
+  
+    res.status(200).json({ message: 'Property deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }  
   };
 
 export {

@@ -1,8 +1,10 @@
-import { Email, Phone, Place } from '@mui/icons-material';
+import { Email, Place } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@pankod/refine-mui';
+import { profile_bg } from 'assets';
 
-import { ProfileProps, PropertyProps } from 'interfaces/common';
+import { ProfileProps, PropertyProps, PostsProps } from 'interfaces/common';
 import PropertyCard from './PropertyCard';
+import PostCard from './PostCard';
 
 function checkImage(url: any) {
   let img = new Image();
@@ -10,10 +12,12 @@ function checkImage(url: any) {
   return img.width !== 0 && img.height !== 0;
 }
 
-const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
+const Profile = ({ type, name, avatar, email, properties, posts }: ProfileProps) => (
   <Box>
-    <Typography fontSize={25} fontWeight={700} color="#11142D">{type} Profile</Typography>
-
+    <Box sx={{ textAlign: { xs:'center', md:'initial'} }}>
+       <Typography fontSize={25} fontWeight={700} color="#11142D" >{type} Profile</Typography>
+    </Box>
+   
     <Box
       mt="20px"
       borderRadius="15px"
@@ -28,7 +32,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
         }}
       >
         <img
-          src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
+          src={profile_bg}
           width={340}
           height={320}
           alt="abstract"
@@ -50,7 +54,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
             <Box flex={1} display="flex" flexDirection="column" justifyContent="space-between" gap="30px">
               <Stack direction="column">
                 <Typography fontSize={22} fontWeight={600} color="#11142D">{name}</Typography>
-                <Typography fontSize={16} color="#808191">Real-Estate Agent</Typography>
+                <Typography fontSize={16} color="#808191">Admin</Typography>
               </Stack>
 
               <Stack direction="column" gap="30px">
@@ -64,20 +68,13 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
 
                 <Stack direction="row" flexWrap="wrap" gap="20px" pb={4}>
                   <Stack flex={1} gap="15px">
-                    <Typography fontSize={14} fontWeight={500} color="#808191">Phone Number</Typography>
-                    <Box display="flex" flexDirection="row" alignItems="center" gap="10px">
-                      <Phone sx={{ color: '#11142D' }} />
-                      <Typography fontSize={14} color="#11142D" noWrap>+234 90166 04383</Typography>
-                    </Box>
-                  </Stack>
-
-                  <Stack flex={1} gap="15px">
                     <Typography fontSize={14} fontWeight={500} color="#808191">Email</Typography>
                     <Box display="flex" flexDirection="row" alignItems="center" gap="10px">
                       <Email sx={{ color: '#11142D' }} />
                       <Typography fontSize={14} color="#11142D">{email}</Typography>
                     </Box>
                   </Stack>
+
                 </Stack>
               </Stack>
             </Box>
@@ -93,8 +90,10 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
       padding="20px"
       bgcolor="#FCFCFC"
     >
-      <Typography fontSize={18} fontWeight={600} color="#11142D">{type} Properties</Typography>
-
+      <Box sx={{ textAlign: { xs:'center', md:'initial'} }}>
+        <Typography fontSize={18} fontWeight={600} color="#11142D">{type} Properties</Typography>
+      </Box>
+      
       <Box
         mt={2.5}
         sx={{
@@ -109,6 +108,41 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
             location={property.location}
             price={property.price}
             photo={property.photo}
+            date={property.date}
+          />
+        ))}
+      </Box>
+    </Box>
+    )}
+
+    {posts.length > 0 && (
+    <Box
+      mt={2.5}
+      borderRadius="15px"
+      padding="20px"
+      bgcolor="#FCFCFC"
+    >
+      <Box sx={{ textAlign: { xs:'center', md:'initial'} }}>
+        <Typography fontSize={18} fontWeight={600} color="#11142D">{type} Posts</Typography>
+      </Box>
+      
+      <Box
+        mt={2.5}
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2.5,
+        }}
+      >
+        {posts?.map((post: PostsProps) => (
+          <PostCard 
+          key={post._id}
+          id={post._id}
+          title={post.title}
+          photo={post.photo}
+          body={post.body}
+          tags={post.tags}
+          date={post.date} 
           />
         ))}
       </Box>

@@ -18,13 +18,14 @@ const AgentProfile = () => {
   if(isError) return <div>Error...</div>
 
   return (
-    <Profile 
-      type="Agent"
+    <Profile
+      type="Admins"
       name={myProfile.name}
       email={myProfile.email}
       avatar={myProfile.avatar}
       properties={myProfile.allProperties}
-      />
+      posts={myProfile.allPosts}
+    />
   )
 }
 

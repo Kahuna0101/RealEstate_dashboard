@@ -20,7 +20,7 @@ const AllProperties = () => {
     sorter, setSorter,
     filters, setFilters,
   } = useTable();
-
+ 
   const allProperties = data?.data ?? [];
 
   const currentPrice = sorter.find((item) => item.field === 'price')?.order || 'desc';
@@ -43,22 +43,24 @@ const AllProperties = () => {
 
   return (
     <Box>
-      <Box mt="20px" sx={{display: 'flex', flexWrap: 'wrap', gap: 3}}>
+      <Box mt="20px" sx={{display: 'flex', flexWrap: 'wrap', gap: 3 }} padding={{ xs: '30px', md: '20px'}}>
         <Stack direction="column" width="100%">
-          <Typography fontSize={25} fontWeight={700} color="#11142d">
+          <Box sx={{ textAlign: { xs:'center', md:'initial'} }}>
+            <Typography fontSize={25} fontWeight={700} color="#11142d">
             {!allProperties.length? 'There are no properties' : 'All Properties'}
             </Typography>
-            <Box mb={2} mt={3} display="flex" width="84%" justifyContent="space-between" flexWrap="wrap" >
-              <Box display="flex" gap={2} flexWrap="wrap" mb={{ xs: '20px', sm: 0 }}>
+          </Box>
+          
+            <Box mb={2} mt={3} display="flex" width="100%" justifyContent={{ xs: 'center', md: 'space-between'}}  flexWrap="wrap" >
+              <Box display="flex" gap={2} flexWrap="wrap" mb={{ xs: '20px', sm: 0 }} justifyContent={{ xs: 'center', md: 'space-between'}} >
                 <CustomButton
                   title={`Sort price ${currentPrice === 'asc' ? '↑' : '↓'}`}
                   handleClick={() => toggleSort('price')}
-                  backgroundColor= "#475be8"
+                  backgroundColor= "#6dcd00"
                   color= "#fcfcfc"
                 />
                 <TextField
                 variant="outlined"
-                color="info"
                 placeholder="Search by title"
                 value={currentFilterValues.title}
                 onChange={(e) => {
@@ -73,7 +75,6 @@ const AllProperties = () => {
                 />
                 <Select 
                 variant="outlined"
-                color="info"
                 displayEmpty
                 required
                 inputProps={{ 'aria-label' : 'without label'}}
@@ -90,15 +91,15 @@ const AllProperties = () => {
                   )}
                 >
                   <MenuItem value="">All</MenuItem>
-                  {['Apartment', 'Villa', 'Farmhouse', 'Condos', 'Townhouse', 'Duplex', 'Studio', 'Chalet'].map((type) => (
+                  {['Lands', 'Apartments'].map((type) => (
                     <MenuItem key={type} value={type.toLowerCase()}>{type}</MenuItem>
                   ))}
             </Select>
         </Box>
-        <CustomButton
+         <CustomButton
           title="Add Property"
           handleClick={() => navigate('/properties/create')}
-          backgroundColor="#475be8"
+          backgroundColor="#6dcd00"
           color="#fcfcfc"
           icon={<Add />}
           />
@@ -111,7 +112,8 @@ const AllProperties = () => {
             title={property.title}
             location={property.location}
             price={property.price}
-            photo={property.photo}
+            photo={property.images[0]}
+            date={property.date}
             />
         ))}
       </Box>
@@ -121,7 +123,7 @@ const AllProperties = () => {
           <CustomButton
             title= "Previous"
             handleClick={() => setCurrent((prev) => prev -1)}
-            backgroundColor="#475be8"
+            backgroundColor="#6dcd00"
             color="#fcfcfc"
             disabled={!(current > 1)}
           />
@@ -131,7 +133,7 @@ const AllProperties = () => {
           <CustomButton
             title= "Next"
             handleClick={() => setCurrent((prev) => prev +1)}
-            backgroundColor="#475be8"
+            backgroundColor="#6dcd00"
             color="#fcfcfc"
             disabled={current === pageCount}
           />
@@ -142,9 +144,9 @@ const AllProperties = () => {
               required
               inputProps={{ 'aria-label' : 'without label'}}
               defaultValue={10}
-              onChange={(e) => setPageSize(e.target.value ? Number(e.target.value) : 10)}
+              onChange={(e) => setPageSize(e.target.value ? Number(e.target.value) : 12)}
             >
-              {[10, 20, 30, 40, 50].map((size) => (
+              {[12, 24, 36, 48, 60].map((size) => (
                 <MenuItem key={size} value={size}>Show{size}</MenuItem>
               ))}  
                 </Select>

@@ -3,11 +3,11 @@ import { ApexOptions } from 'apexcharts';
 export const TotalRevenueSeries = [
   {
     name: 'Last Month',
-    data: [183, 124, 115, 85, 143, 143, 96],
+    data: [95, 84, 72, 44, 108, 108, 47],
   },
   {
     name: 'Running Month',
-    data: [95, 84, 72, 44, 108, 108, 47],
+    data: [183, 124, 115, 85, 143, 143, 96],
   },
 ];
 
@@ -18,7 +18,7 @@ export const TotalRevenueOptions: ApexOptions = {
       show: false,
     },
   },
-  colors: ['#475BE8', '#CFC8FF'],
+  colors: ['#F45252', '#6dcd00'],
   plotOptions: {
     bar: {
       borderRadius: 4,
@@ -41,7 +41,7 @@ export const TotalRevenueOptions: ApexOptions = {
   },
   yaxis: {
     title: {
-      text: '$ (thousands)',
+      text: '₦ (Millions)',
     },
   },
   fill: {
@@ -54,7 +54,7 @@ export const TotalRevenueOptions: ApexOptions = {
   tooltip: {
     y: {
       formatter(val: number) {
-        return `$ ${val} thousands`;
+        return `₦ ${val} Millions`;
       },
     },
   },

@@ -9,17 +9,14 @@ import {
 } from "@pankod/refine-mui";
 import {
   AccountCircleOutlined,
-  ChatBubbleOutline,
   PeopleAltOutlined,
-  StarOutlineRounded,
+  NewspaperOutlined,
   VillaOutlined,
 } from "@mui/icons-material"
 
 import dataProvider from "@pankod/refine-simple-rest";
 import routerProvider from "@pankod/refine-react-router-v6";
 import axios, { AxiosRequestConfig } from "axios";
-
-
 import { ColorModeContextProvider } from "contexts";
 import { Title, Sider, Layout, Header } from "components/layout";
 import { CredentialResponse } from "interfaces/google";
@@ -28,13 +25,17 @@ import { parseJwt } from "utils/parse-jwt";
 import {
   Login,
   Home,
-  Agents,
+  Admins,
   MyProfile,
   PropertyDetails,
   AllProperties,
   CreateProperty,
   AgentProfile,
   EditProperty,
+  AllPosts,
+  PostDetails,
+  CreatePost,
+  EditPost,
 } from 'pages';
 
 const axiosInstance = axios.create();
@@ -56,15 +57,23 @@ const App = () => {
     login: async ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
+      // Verify email domain
+      const allowedDomain = "@adronhomesproperties.com";
+      const userEmail = profileObj?.email ?? "";
+
+      if (!userEmail.endsWith(allowedDomain)) {
+        return Promise.reject("Access denied. Only @adronhomesproperties.com email addresses are allowed.");
+      }
+
       // Save user to MongoDB...
       if (profileObj) {
-        const response = await fetch('http://localhost:8080/api/v1/users', {
+        const response = await fetch("http://localhost:8080/api/v1/users", {
           method: 'POST',
           headers: { 'Content-Type' : 'application/json' },
           body: JSON.stringify({
             name: profileObj.name,
             email: profileObj.email,
-            avatar: profileObj.picture,
+            avatar: profileObj.picture
           }),
         });
 
@@ -139,20 +148,18 @@ const App = () => {
               icon: <VillaOutlined />
             },
             {
-              name: 'agents',
-              list: Agents,
+              name: 'posts',
+              list:  AllPosts,
+              show: PostDetails,
+              create: CreatePost,
+              edit: EditPost,
+              icon: <NewspaperOutlined /> 
+            },
+            {
+              name: 'admins',
+              list: Admins,
               show: AgentProfile,
               icon: <PeopleAltOutlined />
-            },
-            {
-              name: 'reviews',
-              list: Home,
-              icon: <StarOutlineRounded /> 
-            },
-            {
-              name: 'messages',
-              list: Home,
-              icon: <ChatBubbleOutline />
             },
             {
               name: 'my-profile',

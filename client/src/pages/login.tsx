@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useLogin } from "@pankod/refine-core";
-import { Container, Box } from "@pankod/refine-mui";
+import { Container, Box, Typography } from "@pankod/refine-mui";
 
-import { yariga } from "../assets";
+import { logo } from "../assets";
 
 import { CredentialResponse } from "../interfaces/google";
 
@@ -63,9 +63,8 @@ export const Login: React.FC = () => {
             alignItems: "center",
           }}
         >
-          <div>
-            <img src={yariga} alt="Yariga Logo" />
-          </div>
+            <img src={logo} alt="adron Logo" />
+          <Typography mt={1} fontSize={15} fontWeight={600} color="red">...building cities, communites & homes</Typography>
           <Box mt={4}>
             <GoogleButton />
           </Box>

@@ -179,16 +179,16 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                 "&.Mui-selected": {
                   "&:hover": {
                     backgroundColor:
-                    isSelected? '#1e36e8' : "transparent",
+                    isSelected? '#5fb300' : "transparent",
                   },
                   backgroundColor:
-                  isSelected? '#475be8' : "transparent",
+                  isSelected? '#6dcd00' : "transparent",
                 },
                 justifyContent: "center",
                 margin: '10px auto',
                 borderRadius: '12px',
                 minHeight: '56px',
-                width: '90%'
+                width: '90%',
               }}
             >
               <ListItemIcon
@@ -419,13 +419,13 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           </Box>
           <Button
             sx={{
-              background: "#475be8",
+              background: "#6dcd00",
               color: "primary.contrastText",
               textAlign: "center",
               borderRadius: 0,
               borderTop: "1px solid #ffffff1a",
               '&:hover': {
-                background: '#1e36e8'
+                background: '#5fb300'
               }
             }}
             fullWidth
@@ -442,7 +442,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             top: "64px",
             left: "0px",
             borderRadius: "0 6px 6px 0",
-            bgcolor: "#475be8",
+            bgcolor: "#6dcd00",
             zIndex: 1199,
             width: "36px",
           }}

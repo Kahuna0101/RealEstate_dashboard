@@ -8,19 +8,22 @@ const Agent = () => {
       resource: 'users',
   });
 
-  const allAgents = data?.data ?? [];
+  const allAdmins = data?.data ?? [];
 
   if(isLoading) return <div>Loading...</div>
   if(isError) return <div>Error...</div>
 
   return (
     <Box>
-      <Typography fontSize={25} fontWeight={700} color="#11142d">Agents List</Typography>
+      <Box sx={{ textAlign: { xs:'center', md:'initial'} }}>
+        <Typography fontSize={25} fontWeight={700} color="#11142d">Admins List</Typography>
+      </Box>
+      
 
       <Box mt="20px" sx={{ display: 'flex', flexWrap:'wrap',
-        gap:'20px', backgroundColor:'#fcfcfc'}}
+        gap:'20px', backgroundColor:'#fcfcfc', padding: '10px'}}
       >
-        {allAgents.map((agent) => (
+        {allAdmins.map((agent) => (
           <AgentCard 
           key={agent._id}
           id={agent._id}
@@ -28,6 +31,7 @@ const Agent = () => {
           email={agent.email}
           avatar={agent.avatar}
           noOfProperties={agent.allProperties.length}
+          noOfPosts={agent.allPosts.length}
           />
         ))}
       </Box>

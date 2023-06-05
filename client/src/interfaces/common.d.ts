@@ -14,7 +14,17 @@ export interface ProfileProps {
     name: string,
     avatar: string,
     email: string,
-    properties: Array | undefined
+    properties: Array | undefined,
+    posts: Array | undefined
+}
+
+export interface PostsProps {
+    _id: string,
+    title: string,
+    body: string,
+    tags: string,
+    photo: string,
+    date: string
 }
 
 export interface PropertyProps {
@@ -24,7 +34,26 @@ export interface PropertyProps {
     location: string,
     price: string,
     photo: string,
-    creator: string
+    gateHouse: string,
+    baths: string,
+    rooms: string,
+    area: string,
+    video: string,
+    panorama: string,
+    creator: string,
+    images: string,
+    legalDoc: string,
+    structuralDrawing: string,
+    surveyPrice: string,
+    certificationFee: string,
+    devFee: string,
+    meFeeDuplex: string,
+    meFeeBungalow: string,
+    archFeeDuplex: string,
+    archFeeBungalow: string,
+    approvalBungalow: string,
+    approvalDuplex: string,
+    date: string,
 }
 
 export interface FormProps {
@@ -35,5 +64,16 @@ export interface FormProps {
     handleSubmit: FormEventHandler<HTMLFormElement> | undefined,
     handleImageChange: (file) => void,
     onFinishHandler: (data: FieldValues) => Promise<void> | void,
-    propertyImage: { name: string, url: string },
+    propertyImages: { name: string; url: string }[],
+}
+
+export interface PostProps {
+    type: string,
+    register: any,
+    onFinish: (values: FieldValues) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>,
+    formLoading: boolean,
+    handleSubmit: FormEventHandler<HTMLFormElement> | undefined,
+    handleImageChange: (file) => void,
+    onFinishHandler: (data: FieldValues) => Promise<void> | void,
+    postImage: { name: string, url: string },
 }
