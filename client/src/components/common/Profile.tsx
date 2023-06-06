@@ -107,7 +107,7 @@ const Profile = ({ type, name, avatar, email, properties, posts }: ProfileProps)
             title={property.title}
             location={property.location}
             price={property.price}
-            photo={property.photo}
+            photo={property.images[0]}
             date={property.date}
           />
         ))}

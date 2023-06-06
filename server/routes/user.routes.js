@@ -2,7 +2,7 @@ import express from 'express';
 
 // IMPORT ALL THE CONTROLLERS ...
 
-import { getAllUsers, createUser, getUserInfoByID } from '../controlers/user.controller.js';
+import { getAllUsers, createUser, getUserInfoByID } from '../controllers/user.controller.js';
 
 const router = express.Router();
 

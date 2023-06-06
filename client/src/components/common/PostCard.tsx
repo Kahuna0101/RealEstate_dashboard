@@ -1,6 +1,6 @@
 import { LocalOffer, ReadMore, CalendarMonthOutlined } from '@mui/icons-material';
 import { Link } from '@pankod/refine-react-router-v6';
-import { Typography, Box, Card, CardMedia, CardContent, Stack, Tooltip, Button} from '@pankod/refine-mui';
+import { Typography, Box, Card, CardMedia, CardContent, Stack, Tooltip, Button, borderColor} from '@pankod/refine-mui';
 
 import { PostCardProps } from 'interfaces/post';
 
@@ -10,8 +10,8 @@ const PostCard = ({ id, title, body, tags, photo, date }: PostCardProps) => {
     component={Link} to={`/posts/show/${id}`}
     sx={{ 
       maxWidth: '330px', padding: '10px',
-    '&:hover': {boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.1)'},
-    cursor: 'pointer'
+      '&:hover': {boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.1)'},
+      cursor: 'pointer'
     }}
     elevation={0}
     >

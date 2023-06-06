@@ -25,8 +25,9 @@ const PropertySchema = new mongoose.Schema({
     archFeeBungalow: { type: Number, required: true },
     approvalBungalow: { type: Number, required: true },
     approvalDuplex: { type: Number, required: true },
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     date: { type: Date, default: Date.now },
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    
 })
 
 const propertyModel = mongoose.model('Property', PropertySchema);

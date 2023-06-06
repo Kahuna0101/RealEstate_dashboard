@@ -91,7 +91,7 @@ const AllProperties = () => {
                   )}
                 >
                   <MenuItem value="">All</MenuItem>
-                  {['Lands', 'Apartments'].map((type) => (
+                  {['Land', 'Apartment'].map((type) => (
                     <MenuItem key={type} value={type.toLowerCase()}>{type}</MenuItem>
                   ))}
             </Select>

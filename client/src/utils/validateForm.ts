@@ -51,14 +51,7 @@ export const validateForm = (formValues: FormValues) => {
 
       case 'gateHouse':
         if (!formValues.gateHouse) {
-           errors.message = 'GateHouse is required';
-          hasError = true;
-        }
-        break;
-
-      case 'baths':
-        if (!formValues.baths) {
-          errors.message = 'Baths is required';
+          errors.message = 'GateHouse is required';
           hasError = true;
         }
         break;
@@ -77,90 +70,90 @@ export const validateForm = (formValues: FormValues) => {
         }
         break;
 
-      case 'areas':
+      case 'area':
         if (!formValues.area) {
-          errors.message = 'areas is required';
+          errors.message = 'Area is required';
           hasError = true;
         }
         break;
 
       case 'legalDoc':
-        if (!formValues.area) {
+        if (!formValues.legalDoc) {
           errors.message = 'Legal Documentation Price is required';
           hasError = true;
         }
         break;
 
       case 'structuralDrawing':
-        if (!formValues.area) {
+        if (!formValues.structuralDrawing) {
           errors.message = 'Structural Drawing Price is required';
           hasError = true;
         }
         break;
-    
+
       case 'surveyPrice':
-        if (!formValues.area) {
+        if (!formValues.surveyPrice) {
           errors.message = 'Survey Plan Price is required';
           hasError = true;
         }
         break;
 
       case 'certificationFee':
-        if (!formValues.area) {
+        if (!formValues.certificationFee) {
           errors.message = 'Stage Certification Fee is required';
           hasError = true;
         }
         break;
 
       case 'devFee':
-        if (!formValues.area) {
+        if (!formValues.devFee) {
           errors.message = 'Infrastructure/Development Fee is required';
           hasError = true;
         }
         break;
 
       case 'meFeeDuplex':
-        if (!formValues.area) {
+        if (!formValues.meFeeDuplex) {
           errors.message = 'M & E Drawing Fee for Duplex is required';
           hasError = true;
         }
         break;
 
       case 'meFeeBungalow':
-        if (!formValues.area) {
+        if (!formValues.meFeeBungalow) {
           errors.message = 'M & E Drawing Fee for Bungalow is required';
           hasError = true;
         }
         break;
 
       case 'archFeeDuplex':
-        if (!formValues.area) {
+        if (!formValues.archFeeDuplex) {
           errors.message = 'Architectural Fee for Duplex is required';
           hasError = true;
         }
         break;
 
       case 'archFeeBungalow':
-        if (!formValues.area) {
+        if (!formValues.archFeeBungalow) {
           errors.message = 'Architectural Fee for Bungalow is required';
           hasError = true;
         }
         break;
 
       case 'approvalBungalow':
-        if (!formValues.area) {
+        if (!formValues.approvalBungalow) {
           errors.message = 'Building Approval Fee for Bungalow is required';
           hasError = true;
         }
         break;
-        
+
       case 'approvalDuplex':
-        if (!formValues.area) {
+        if (!formValues.approvalDuplex) {
           errors.message = 'Building Approval Fee for Duplex is required';
           hasError = true;
         }
         break;
-        
+
       default:
         hasError = false;
     }

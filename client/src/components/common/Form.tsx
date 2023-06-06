@@ -5,10 +5,6 @@ import CustomButton from "./CustomButton";
 
 const Form = ({ type, register, handleSubmit, handleImageChange, formLoading, onFinishHandler, propertyImages }: FormProps) => {
 
-  const [propertyType, setPropertyType] = useState('land');
-
-  const showAdditionalFees = propertyType !== 'apartment';
-
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700}
@@ -69,8 +65,8 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading, on
                   displayEmpty
                   required
                   inputProps={{ 'aria-label':'Without label'}}
-                  value={propertyType}
-                  onChange={(e) => setPropertyType(e.target.value)}
+                  defaultValue="land"
+                  {...register('propertyType', {required: true})}
                 >
                   <MenuItem value="land">Land</MenuItem>
                   <MenuItem value="apartment">Apartment</MenuItem>
@@ -258,9 +254,7 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading, on
               )}
           </Stack>
 
-          
-          {showAdditionalFees && (
-          <Box>
+
           <Typography fontSize={25} fontWeight={700} color="#11142d">Additional Fees</Typography>
           
           <Stack sx={{ flexDirection:{xs:"column", md:"row"}}} gap={4}>
@@ -424,8 +418,6 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading, on
                 />
               </FormControl>
           </Stack>
-          </Box>
-          )}
 
           <CustomButton 
             type="submit"

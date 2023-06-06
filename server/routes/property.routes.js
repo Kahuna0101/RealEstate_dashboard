@@ -3,7 +3,7 @@ import express from 'express';
 // IMPORT ALL THE CONTROLLERS ...
 
 import { getAllProperties, getPropertyDetail, createProperty, updateProperty, deleteProperty, } 
-from '../controlers/property.controller.js';
+from '../controllers/property.controller.js';
 
 const router = express.Router();
 

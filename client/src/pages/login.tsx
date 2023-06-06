@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useLogin } from "@pankod/refine-core";
 import { Container, Box, Typography } from "@pankod/refine-mui";
 
-import { logo } from "../assets";
+import { adronp } from "../assets";
 
 import { CredentialResponse } from "../interfaces/google";
 
@@ -63,7 +63,7 @@ export const Login: React.FC = () => {
             alignItems: "center",
           }}
         >
-            <img src={logo} alt="adron Logo" />
+            <img src={adronp} alt="adron Logo" />
           <Typography mt={1} fontSize={15} fontWeight={600} color="red">...building cities, communites & homes</Typography>
           <Box mt={4}>
             <GoogleButton />

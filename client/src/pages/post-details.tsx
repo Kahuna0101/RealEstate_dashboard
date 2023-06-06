@@ -46,7 +46,7 @@ const PostDetails = () => {
       
       <Box mt="20px" display="flex" flexDirection={{ xs: 'column', lg: 'row' }} gap={4} justifyContent="space-between">
 
-        <Box flex={1} maxWidth={964}>
+        <Box flex={1} maxWidth={994}>
           <img
             src={postDetails.photo}
             alt="post_details-img"

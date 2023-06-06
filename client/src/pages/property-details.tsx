@@ -4,6 +4,7 @@ import { useParams, useNavigate } from '@pankod/refine-react-router-v6';
 import { BedOutlined, Delete, Edit, House, Place, ShowerOutlined, SquareFoot, Star } from '@mui/icons-material';
 
 import { AdditionalFees, CustomButton, ThumbnailSlider } from 'components';
+import { gate } from 'assets';
 
 const PropertyDetails = () => {
   const navigate = useNavigate();
@@ -45,29 +46,26 @@ const PropertyDetails = () => {
     >
       <Stack direction="row" gap={3} alignItems="center">
         <Typography fontSize={25} fontWeight={700} color="#11142D">{`${propertyDetails.title} Details`}</Typography>
-        <Box sx={{ backgroundColor: propertyDetails.propertyStatus === "forsale" ? "#6dcd00" : "#d42e2e" , padding: '5px', color: "#fff",
+        <Box sx={{ backgroundColor: propertyDetails.propertyStatus === "forsale" ? "#d42e2e" : "#6dcd00" , padding: '5px', color: "#fff",
          textTransform: 'capitalize', fontSize: 20, fontWeight: 600, borderRadius: '5px' }}>
           {propertyDetails.propertyStatus}
         </Box>
       </Stack>
       
 
-      <Box mt="20px" display="flex" flexDirection={{ xs: 'column', lg: 'row' }} gap={4} width="100%">
+      <Box mt="20px" display="flex" flexDirection={{ xs: 'column', lg: 'row' }} justifyContent="space-between" width="100%">
 
-        <Box flex={1} width={{ xs:530, md:964}}>
+        <Box width={{ xs:530, md:994 }}>
             <ThumbnailSlider images={propertyDetails.images} />
           <Box mt="15px">
             <Stack direction="row" justifyContent="space-between" flexWrap="wrap" alignItems="center">
             
-            {propertyDetails.propertyType === "land" ? 
-              <Typography fontSize={20} fontWeight={700} color="#11142D" textTransform="uppercase">{propertyDetails.propertyType}</Typography>
-            : <Typography fontSize={20} fontWeight={700} color="#11142D" textTransform="uppercase">{propertyDetails.propertyType}</Typography>
-            }
+            <Typography fontSize={20} fontWeight={700} color="#11142D" textTransform="uppercase">{propertyDetails.propertyType}</Typography>
             
             {propertyDetails.propertyType === "land" ? 
             <Stack direction="row" alignItems="center" color="#11142D" gap={2}>
               <Stack direction="row" gap={0.5} alignItems="center">
-                <House sx={{ color: '#6dcd00', fontSize: 40 }} />
+              <img src={gate} width="30px" height="30px" style={{ filter: "sepia(100%) saturate(500%) hue-rotate(60deg)" }} />
                 <Typography fontSize={20} fontWeight={600} textTransform="capitalize">{propertyDetails.gateHouse}</Typography>
               </Stack>
               <Stack direction="row" gap={0.5} alignItems="center">
@@ -132,7 +130,7 @@ const PropertyDetails = () => {
           </Box>
         </Box>
 
-        <Box width="100%" flex={1} display="flex" flexDirection={{ xs: "column-reverse", md:"column" }} gap="20px">
+        <Box display="flex" flexDirection={{ xs: "column-reverse", md:"column" }} gap="20px">
           <Stack
             width="100%"
             p={2}
