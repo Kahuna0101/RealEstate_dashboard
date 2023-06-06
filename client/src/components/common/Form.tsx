@@ -7,7 +7,7 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading, on
 
   const [propertyType, setPropertyType] = useState('land');
 
-  const showAdditionalFees = propertyType !== 'house';
+  const showAdditionalFees = propertyType !== 'apartment';
 
   return (
     <Box>
