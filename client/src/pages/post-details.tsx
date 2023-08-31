@@ -128,7 +128,7 @@ const PostDetails = () => {
                 color="#FCFCFC"
                 fullWidth
                 icon={<Edit />}
-                handleClick={() => {navigate(`/properties/edit/${postDetails._id}`)}}
+                handleClick={() => {navigate(`/posts/edit/${postDetails._id}`)}}
               />
               <CustomButton
                 title="Delete"

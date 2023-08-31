@@ -1,7 +1,7 @@
 import { Typography, Box, Stack, Grid } from '@pankod/refine-mui';
 import { useDelete, useShow } from '@pankod/refine-core';
 import { useParams, useNavigate } from '@pankod/refine-react-router-v6';
-import { BedOutlined, Delete, Edit, House, Place, ShowerOutlined, SquareFoot, Star } from '@mui/icons-material';
+import { BedOutlined, Delete, Edit, Place, ShowerOutlined, SquareFoot, Star } from '@mui/icons-material';
 
 import { AdditionalFees, CustomButton, ThumbnailSlider } from 'components';
 import { gate } from 'assets';
